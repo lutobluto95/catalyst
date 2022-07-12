@@ -6,7 +6,7 @@ def generateSQL(kpi_name, group_ids, tx, date_range):
     if kpi_name not in ['mentions','conv']: raise ValueError("kpi name can only have 'mentions' and 'conv' as values")
     group_ids = tuple(group_ids)
     queries = {
-        'mentions':f"""Select groupid, createdatutc,textlower, sentimentrvalue from bd_cs_prod_conversations
+        'mentions':f"""Select groupid, createdatutc,textlower, sentimentrvalue,sourceid,parentsourceid,type from bd_cs_prod_conversations
                     where groupid in {group_ids} and ({tx}) and ({date_range})""",
 
         'conv':f"""Select groupid,createdatutc,textlower,sentimentrvalue,sourceid,parentsourceid,type
